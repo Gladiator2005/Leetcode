@@ -1,0 +1,16 @@
+import heapq
+
+class Solution:
+    def getFinalState(self, nums, k, multiplier):
+        min_heap = [(nums[i], i) for i in range(len(nums))]
+        heapq.heapify(min_heap)
+
+        while k > 0:
+            k -= 1
+            curr = heapq.heappop(min_heap)
+
+            new_value = curr[0] * multiplier
+            nums[curr[1]] *= multiplier
+            heapq.heappush(min_heap, (new_value, curr[1]))
+
+        return nums
